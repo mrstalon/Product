@@ -1,36 +1,25 @@
-function multiply(first, second) {
+module.exports = function multiply(first, second) {
     // your solution
-    function multiply(strNum1,strNum2){
 
-        let a1 = strNum1.split("").reverse(),
-         a2 = strNum2.toString().split("").reverse(),
-         aResult = new Array;
+        let firstParsedNumber = first.split("").reverse(),
+            secondParsedNumber = second.toString().split("").reverse(),
+            ResultOfMultiply = [];
 
-        for ( let iterNum1 = 0; iterNum1 < a1.length; iterNum1++ ) {
-            for ( let iterNum2 = 0; iterNum2 < a2.length; iterNum2++ ) {
-                let arrayPos = iterNum2 + iterNum1,
-                    product,
-                    reminder;
+        for (let firstNumIteration = 0; firstNumIteration < firstParsedNumber.length; firstNumIteration++) {
+            for (let secondNumIteration = 0; secondNumIteration < secondParsedNumber.length; secondNumIteration++) {
+                let arrayPos = firstNumIteration + secondNumIteration;
 
-                aResult[arrayPos] = a1[iterNum1]*a2[iterNum2] + (aResult[arrayPos] === undefined ? 0 : aResult[arrayPos]);
+                ResultOfMultiply[arrayPos] = firstParsedNumber[firstNumIteration] * secondParsedNumber[secondNumIteration] + (ResultOfMultiply[arrayPos] === undefined ? 0 : ResultOfMultiply[arrayPos]);
 
-                if(aResult[arrayPos]>9){
-                    let stringProduct = aResult[arrayPos].toString();
-                    product = stringProduct[1];
-                    reminder = stringProduct[0];
-
-                    aResult[arrayPos] = product;
-                    aResult[arrayPos+1] = reminder;
+                if (ResultOfMultiply[arrayPos] > 9) {
+                    ResultOfMultiply[arrayPos + 1] = Math.floor(ResultOfMultiply[arrayPos] / 10)  + (ResultOfMultiply[arrayPos + 1] === undefined ? 0 : ResultOfMultiply[arrayPos + 1] );
+                    console.log("before : " + ResultOfMultiply[arrayPos]);
+                    ResultOfMultiply[arrayPos] -= Math.floor(ResultOfMultiply[arrayPos] / 10) * 10;
+                    console.log("after : " + ResultOfMultiply[arrayPos]);
                 }
-
-
             }
         }
-        return aResult.reverse().join("");
-    }
 
-    return multiply(first, second);
+        return ResultOfMultiply.reverse().join("");
+
 };
-
-
-console.log(multiply('99', '99'));
